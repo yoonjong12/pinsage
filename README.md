@@ -3,9 +3,9 @@ pinsage for wine recommendation
 제 11회 투빅스 컨퍼런스 '투믈리에'조에서 준비한 와인 추천 시스템에 적용한 PinSAGE 패키지입니다
 DGL 라이브러리를 바탕으로 구현했으며, PinSAGE 예제에서 프로젝트에 맞게 수정하였습니다.
 
-PinSAGE paper: https://arxiv.org/pdf/1806.01973.pdf
-DGL: https://docs.dgl.ai/#
-DGL PinSAGE example: https://github.com/dmlc/dgl/tree/master/examples/pytorch/pinsage
+PinSAGE paper: https://arxiv.org/pdf/1806.01973.pdf <br>
+DGL: https://docs.dgl.ai/# <br>
+DGL PinSAGE example: https://github.com/dmlc/dgl/tree/master/examples/pytorch/pinsage <br>
 
 ## Requirements
 
