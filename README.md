@@ -34,7 +34,7 @@ Item feature: wine_id, body, acidity, alcohol, rating_average, grapes_id
 
 전체 데이터가 아닌만큼 직접 학습하실 때 성능이 원하는만큼 나오지 않을 수 있습니다.
 
-** process_wine.py **가 수집된 데이터를 DGL에 맞게 전처리하는 코드입니다 제공된 데이터를 사용하신다면 참고해주세요
+*process_wine.py*가 수집된 데이터를 DGL에 맞게 전처리하는 코드입니다 제공된 데이터를 사용하신다면 참고해주세요
 
 
 ## Run model
