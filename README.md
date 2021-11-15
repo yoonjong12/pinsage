@@ -20,21 +20,20 @@ DGL PinSAGE example: https://github.com/dmlc/dgl/tree/master/examples/pytorch/pi
 
 ### Vivino 
 11,900,000 Wines & 42,000,000 Users
-
 User feature: userID, user_follower_count, user_rating_count
 Item feature: wine_id, body, acidity, alcohol, rating_average, grapes_id
 
 
-!!! Update 2021/11/16 !!!
-데이터 공유에 요청이 있어서 일부분 사용하실 수 있도록 제공해드립니다.
 
+
+**!!! Update 2021/11/16 !!!**
+데이터 공유에 요청이 있어서 일부분 사용하실 수 있도록 제공해드립니다.
 * 리뷰 데이터 10만개 
 * 유저 메타 데이터
 * 와인 메타 데이터
 
 전체 데이터가 아닌만큼 직접 학습하실 때 성능이 원하는만큼 나오지 않을 수 있습니다.
-
-*process_wine.py*가 수집된 데이터를 DGL에 맞게 전처리하는 코드입니다 제공된 데이터를 사용하신다면 참고해주세요
+**process_wine.py**가 수집된 데이터를 DGL에 맞게 전처리하는 코드입니다 제공된 데이터를 사용하신다면 참고해주세요
 
 
 ## Run model
