@@ -20,6 +20,7 @@ from data_utils import *
 Wine Data Preprocessing
 * 와인 데이터를 DGL 프레임워크 입력에 맞게 전처리하는 코드
 * 제가 진행한 프로젝트에 맞게 짜여진 코드이므로 참고용으로 사용하시면 좋을 것 같습니다
+* 오류가 많을 수 있습니다. Issues로 말씀해주시면 확인하는대로 조치하겠습니다.
 
 * 기준 디렉토리에 아래의 데이터를 준비해둘 것
     * --directory로 기준 디렉토리 입력
@@ -42,7 +43,7 @@ output_path = args.output_path
 # User Data
 with open(os.path.join(directory, 'users.json')) as f:
     user_json = json.load(f)
-users = pd.DataFrame(user_json)
+users = pd.DataFrame(user_json["data"])
 
 columns = ['userID', 'user_follower_count', 'user_rating_count']
 users = users[columns]
@@ -52,15 +53,15 @@ users['user_feats'] = list(users[['user_follower_count', 'user_rating_count']].v
 # Wine Data
 with open(os.path.join(directory, 'wines.json')) as f:
     item_json = json.load(f)
-items = pd.DataFrame(item_json)
+items = pd.DataFrame(item_json["data"])
 items = items.dropna()
 
-columns = ['wine_id', 'name', 'rating_average', 'body', 'acidity', 'alcohol', 'grapes_id']
+columns = ['wine_id', 'name', 'rating_average', 'body', 'acidity_x', 'alcohol', 'grapes_id']
 items = items[columns]
 items = items.dropna(subset=['wine_id', 'grapes_id'])
 
 items['grapes_id'] = [i[0] for i in items['grapes_id']]
-items['wine_feats'] = list(items[['rating_average', 'body', 'acidity' ,'alcohol']].values)
+items['wine_feats'] = list(items[['rating_average', 'body', 'acidity_x' ,'alcohol']].values)
 
 
 # Rating Data
@@ -69,15 +70,27 @@ columns = ['userID', 'wine_id', 'rating_per_user']
 
 with open(os.path.join(directory, 'train.json')) as f:
     train = json.load(f)
-train = pd.DataFrame(train)
-train = train.dropna(subset=['wine_id', 'like'])
+train = pd.DataFrame(train['data'])
+
+'''
+* Like
+생각해보면 유저가 좋게 평가하지 않은 아이템을 추천한다는 것이 좋은 선택일까에 대한 고민을 했습니다.
+만약 rating에 관계없이 학습하고 싶다면 like 관련 코드는 제거하셔도 좋습니다.
+
+저희는 like에 대한 기준을 rating 3점으로 잡았습니다. 
+이 부분은 각자의 판단에 맞게 설정하시면 좋을 것 같습니다.
+'''
+train['like'] = [1 if x >= 3 else 0 for x in train['rating_per_user']]
 train = train[train['like'] == 1]
 train = train[columns]
+
 with open(os.path.join(directory, 'test.json')) as f:
     test = json.load(f)
-test = pd.DataFrame(test)
+test = pd.DataFrame(test['data'])
+
+test['like'] = [1 if x >= 3 else 0 for x in test['rating_per_user']]
 test = test[test['like'] == 1]
-test = test[columns]
+test = test[colunms]
 
 ratings = pd.concat([train, test], axis=0, ignore_index=True)
 user_filter = [k for k, v in ratings['userID'].value_counts().items() if v > 1]
