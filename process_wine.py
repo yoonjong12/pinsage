@@ -9,7 +9,6 @@ from collections import defaultdict
 from tqdm import tqdm
 import pandas as pd
 import numpy as np
-import scipy.sparse as ssp
 import dgl
 import torch
 import torchtext
@@ -25,7 +24,7 @@ Wine Data Preprocessing
 * 기준 디렉토리에 아래의 데이터를 준비해둘 것
     * --directory로 기준 디렉토리 입력
     * users.json: 유저 메타데이터
-    * wines.json: 와인 메타데이터
+    * wine.json: 와인 메타데이터
     * train.json: train 리뷰 데이터
     * test.json: test 리뷰 데이터
 
@@ -60,7 +59,7 @@ columns = ['wine_id', 'name', 'rating_average', 'body', 'acidity_x', 'alcohol', 
 items = items[columns]
 items = items.dropna(subset=['wine_id', 'grapes_id'])
 
-items['grapes_id'] = [i[0] for i in items['grapes_id']]
+items['grapes_id'] = [i[1] for i in items['grapes_id']]
 items['wine_feats'] = list(items[['rating_average', 'body', 'acidity_x' ,'alcohol']].values)
 
 
@@ -90,7 +89,7 @@ test = pd.DataFrame(test['data'])
 
 test['like'] = [1 if x >= 3 else 0 for x in test['rating_per_user']]
 test = test[test['like'] == 1]
-test = test[colunms]
+test = test[columns]
 
 ratings = pd.concat([train, test], axis=0, ignore_index=True)
 user_filter = [k for k, v in ratings['userID'].value_counts().items() if v > 1]
@@ -161,9 +160,6 @@ for userID, df in new_ratings.groupby('userID'):
     temp = df[df['timestamp'] == 1]
     val_dict[userID] = set(df[df['timestamp'] == 1]['wine_id'].values)
     
-# Build title set
-textual_feature = {'name': items['name'].values}
-
 # Build title set
 textual_feature = {'name': items['name'].values}
 
