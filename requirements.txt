@@ -1,6 +1,8 @@
 dgl
 tqdm
 torch
+torchtext
+dask
 partd
 pandas
 fsspec==0.3.3
