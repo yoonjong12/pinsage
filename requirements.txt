@@ -1,7 +1,7 @@
 dgl
 tqdm
 torch
-torchtext
+torchtext==0.6.0
 dask
 partd
 pandas
