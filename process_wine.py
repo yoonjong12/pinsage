@@ -40,7 +40,7 @@ directory = args.directory
 output_path = args.output_path
 
 # User Data
-with open(os.path.join(directory, 'users.json')) as f:
+with open(os.path.join(directory, 'user.json')) as f:
     user_json = json.load(f)
 users = pd.DataFrame(user_json["data"])
 
@@ -50,7 +50,7 @@ users = users.dropna(subset=['userID'])
 users['user_feats'] = list(users[['user_follower_count', 'user_rating_count']].values)
 
 # Wine Data
-with open(os.path.join(directory, 'wines.json')) as f:
+with open(os.path.join(directory, 'wine.json')) as f:
     item_json = json.load(f)
 items = pd.DataFrame(item_json["data"])
 items = items.dropna()
