@@ -69,7 +69,7 @@ python model.py -d data.pkl -s model -k 500 --eval-epochs 100 --save-epochs 100 
 ```
 model.py line 159
 
-h_item = evaluation.get_all_emb(gnn, g.ndata['id'][item_ntype], data_dict['textset'], item_ntype, neighbor_sampler, args.batch_size, device)
+h_item = evaluation.get_all_emb(gnn, g.ndata['id'][item_ntype], data_dict['testset'], item_ntype, neighbor_sampler, args.batch_size, device)
 ```
 DGL graph객체에서 노드 정보를 받아 모든 임베딩을 얻어옵니다. shape은 (유저 수, 임베딩 크기)가 됩니다.
 
