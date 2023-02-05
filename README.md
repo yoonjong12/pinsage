@@ -24,9 +24,6 @@ User feature: userID, user_follower_count, user_rating_count
 Item feature: wine_id, body, acidity, alcohol, rating_average, grapes_id
 
 
-
-
-**!!! Update 2021/11/16 !!!**
 데이터 공유 요청이 있어서 일부분 사용하실 수 있도록 제공해드립니다.
 * 리뷰 데이터 10만개 
 * 유저 메타 데이터
