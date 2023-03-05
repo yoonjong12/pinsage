@@ -1,6 +1,6 @@
 # PinSAGE
 pinsage for wine recommendation
-This is the PinSAGE package applied to the wine recommendation system prepared by the 11th Tobix Conference "Tummelier".
+This is the PinSAGE package applied to the wine recommendation system prepared by the 11th Tobigs Conference "투믈리에".
 It was implemented based on the DGL library and modified to fit the project in the PinSAGE example.
 
 PinSAGE paper: https://arxiv.org/pdf/1806.01973.pdf <br>
@@ -18,7 +18,7 @@ DGL PinSAGE example: https://github.com/dmlc/dgl/tree/master/examples/pytorch/pi
 
 ## Dataset
 
-### ### Vivino
+### Vivino
 11,900,000 Wines & 42,000,000 Users
 User feature: userID, user_follower_count, user_rating_count
 Item feature: wine_id, body, acidity, alcohol, rating_average, grapes_id
