@@ -15,21 +15,6 @@ import torchtext
 from builder import PandasGraphBuilder
 from data_utils import *
 
-'''
-Wine Data Preprocessing
-* 와인 데이터를 DGL 프레임워크 입력에 맞게 전처리하는 코드
-* 제가 진행한 프로젝트에 맞게 짜여진 코드이므로 참고용으로 사용하시면 좋을 것 같습니다
-* 오류가 많을 수 있습니다. Issues로 말씀해주시면 확인하는대로 조치하겠습니다.
-
-* 기준 디렉토리에 아래의 데이터를 준비해둘 것
-    * --directory로 기준 디렉토리 입력
-    * users.json: 유저 메타데이터
-    * wine.json: 와인 메타데이터
-    * train.json: train 리뷰 데이터
-    * test.json: test 리뷰 데이터
-
-* output_path는 pkl확장자로 저장할 것
-'''
 print('Processing Started!')
 
 parser = argparse.ArgumentParser()
@@ -73,11 +58,11 @@ train = pd.DataFrame(train['data'])
 
 '''
 * Like
-생각해보면 유저가 좋게 평가하지 않은 아이템을 추천한다는 것이 좋은 선택일까에 대한 고민을 했습니다.
-만약 rating에 관계없이 학습하고 싶다면 like 관련 코드는 제거하셔도 좋습니다.
+I thought about whether it would be a good choice to recommend an item that the user did not evaluate well.
+If you want to learn regardless of the rating, you can remove the code related to like.
 
-저희는 like에 대한 기준을 rating 3점으로 잡았습니다. 
-이 부분은 각자의 판단에 맞게 설정하시면 좋을 것 같습니다.
+We set the standard for like as a rating of 3.
+I think it would be good to set this part according to your own thoughts.
 '''
 train['like'] = [1 if x >= 3 else 0 for x in train['rating_per_user']]
 train = train[train['like'] == 1]
@@ -157,7 +142,6 @@ item_cat_dict = {k: v for k, v in zip(item_cat, new_items['wine_id'].values)}
 # Label
 val_dict = defaultdict(set)
 for userID, df in new_ratings.groupby('userID'):
-    temp = df[df['timestamp'] == 1]
     val_dict[userID] = set(df[df['timestamp'] == 1]['wine_id'].values)
     
 # Build title set
